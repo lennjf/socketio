@@ -20,13 +20,19 @@ function Home() {
 
   
   function opthandler(option){
-    var isA = option==="A" ? true:false;
-    if (!isA && document.getElementById("join-id").value==="") {
+    var isA = option === "A" ? true : false;
+    if (!isA && document.getElementById("join-id").value === "") {
       console.log("empty");
-      return
+      return;
     }
     console.log(isA);
-    socket = io("http://localhost:1024", { reconnectionDelay: 3000 });
+    const URL =
+      process.env.NODE_ENV === "production"
+        ? undefined
+        : "http://localhost:1024";
+    //http://localhost:1024
+    console.log("url: "+URL);
+    socket = io(URL, { reconnectionDelay: 3000 });
     socket.on("connect_error", (error) => {
       console.log("conn err: ", error);
     });
@@ -38,19 +44,18 @@ function Home() {
     socket.io.on("reconnect_attempt", (attempt) => {
       console.log("attempt.....", attempt);
     });
-    
+
     socket.on("connect", () => {
       console.log(socket);
-      setIoState("connected")
+      setIoState("connected");
       isA
         ? history.push({ pathname: "/listen", socket: socket })
         : history.push({
             pathname: "/listen",
             socket: socket,
             joinId: document.getElementById("join-id").value,
-          });;
+          });
     });
-    
   }
   
   return (

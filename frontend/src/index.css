@@ -1,0 +1,29 @@
+@font-face {
+  font-family: medevial;
+  src: url(/public/font/medevial.ttf);
+}
+body {
+  margin: 0;
+  background-image: url('/public/img/background.jpg');
+}
+
+
+
+.App {
+  font-family: medevial;
+  font-size: 25px;
+  text-align: center;
+}
+
+button {
+  font-family: medevial;
+  font-size: 25px;
+  text-align: center;
+  margin: 20px;
+}
+
+#file-input {
+  width: 100px;
+  height: 100px;
+  border: 5px dashed darkgrey;
+}
